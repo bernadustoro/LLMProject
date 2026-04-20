@@ -26,7 +26,7 @@ async def process_and_reply_wa_v2(phone_number_id: str, from_number: str, user_m
         async with httpx.AsyncClient() as client:
             # Menembak langsung ke endpoint V2 lokal
             response = await client.post(
-                "http://127.0.0.1:8000/api/v2/items/ask",
+                "https://llmproject-production.up.railway.app/api/v2/items/ask",
                 json={"question": user_message},
                 timeout=30.0 # Beri waktu agar AI sempat berpikir
             )
@@ -44,7 +44,7 @@ async def process_and_reply_wa_v3(phone_number_id: str, from_number: str, user_m
         async with httpx.AsyncClient() as client:
             # Menembak langsung ke endpoint V3 lokal
             response = await client.post(
-                "http://127.0.0.1:8000/api/v3/agent/ask",
+                "https://llmproject-production.up.railway.app/api/v3/agent/ask",
                 json={"question": user_message},
                 timeout=30.0 # Beri waktu agar AI sempat berpikir
             )
