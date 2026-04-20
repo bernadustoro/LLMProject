@@ -40,7 +40,7 @@ async def process_and_reply_twilio_v2(from_number: str, user_message: str):
             response = await client.post(
                 f"https://llmproject-production.up.railway.app/api/v2/items/ask",
                 json={"question": user_message},
-                timeout=30.0
+                timeout= None
             )
             response.raise_for_status()
             answer_text = response.json().get("answer", "Maaf, AI tidak mengembalikan jawaban.")
@@ -59,7 +59,7 @@ async def process_and_reply_twilio_v3(from_number: str, user_message: str):
             response = await client.post(
                 f"https://llmproject-production.up.railway.app/api/v3/agent/ask",
                 json={"question": user_message},
-                timeout=30.0
+                timeout= None
             )
             response.raise_for_status()
             answer_text = response.json().get("answer", "Maaf, AI tidak mengembalikan jawaban.")
