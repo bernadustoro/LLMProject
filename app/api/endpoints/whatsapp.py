@@ -105,6 +105,12 @@ async def handle_wa_webhook(request: Request, background_tasks: BackgroundTasks,
                             text_body = message["text"]["body"]
                             print(f"\n[RECEIVE] Pesan WA diterima dari {from_number}: '{text_body}'", flush=True)
                             background_tasks.add_task(process_func, phone_number_id, from_number, text_body)
+                        
+                # Menangkap error delivery status (misal: pesan gagal terkirim)
+                elif "statuses" in value:
+                    for status in value["statuses"]:
+                        if status.get("status") == "failed":
+                            print(f"\n!!! [WA DELIVERY FAILED] Alasan: {status.get('errors')}", flush=True)
     except Exception as e:
         print(f"!!! [ERROR] Gagal mem-parsing webhook WhatsApp: {e}", flush=True)
     return {"status": "ok"}
