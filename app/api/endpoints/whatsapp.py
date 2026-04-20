@@ -12,7 +12,7 @@ async def send_wa_message(phone_number_id: str, to_number: str, text_message: st
         print("!!! [FATAL] Gagal mengirim: WHATSAPP_TOKEN tidak ditemukan di environment.", flush=True)
         return
 
-    url = f"https://graph.facebook.com/v18.0/{phone_number_id}/messages"
+    url = f"https://graph.facebook.com/v25.0/{phone_number_id}/messages"
     headers = {
         "Authorization": f"Bearer {wa_token}",
         "Content-Type": "application/json"
