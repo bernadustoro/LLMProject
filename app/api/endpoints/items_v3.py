@@ -33,7 +33,7 @@ def cari_data_produk() -> str:
             "price": i.price, 
             "is_offer": i.is_offer
         } for i in items]
-        return json.dumps(items_data)
+        return json.dumps(items_data, default=str)
     except Exception as e:
         return str(e)
     finally:
@@ -55,7 +55,7 @@ def cari_data_pelanggan() -> str:
             "full_name": u.full_name, 
             "is_active": u.is_active
         } for u in users]
-        return json.dumps(users_data)
+        return json.dumps(users_data, default=str)
     except Exception as e:
         return str(e)
     finally:
@@ -67,7 +67,7 @@ tools = [cari_data_produk, cari_data_pelanggan]
 # 2. Setup LLM & Agent Executor
 # ==========================================
 # Pastikan variabel environment GEMINI_API_KEY sudah terbaca
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", temperature=0.3)
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.3)
 
 system_prompt = "Kamu adalah asisten AI toko cerdas. Gunakan alat (tools) yang tersedia untuk mencari informasi di database sebelum menjawab. Jawab dengan bahasa Indonesia yang ramah dan ringkas."
 

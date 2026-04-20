@@ -10,7 +10,7 @@ from app.db.database import get_db
 
 router = APIRouter()
 
-jenis_model = 'gemini-2.5-flash-lite'  # Atau 'gemini-2.0-flash' sesuai kebutuhan Anda
+jenis_model = 'gemini-2.5-flash'  # Atau 'gemini-2.0-flash' sesuai kebutuhan Anda
 # Inisialisasi model menggunakan LangChain (Otomatis membaca GEMINI_API_KEY dari .env)
 model = ChatGoogleGenerativeAI(model=jenis_model, temperature=0.3)
 
@@ -36,7 +36,7 @@ async def ask_gemini_about_items(request: AskRequest, db: Session = Depends(get_
         }
         
         # Konversi ke JSON dengan indentasi untuk keterbacaan
-        context_data = json.dumps(context_data, indent=2)
+        context_data = json.dumps(context_data, indent=2, default=str)  # default=str untuk menangani tipe data yang tidak bisa langsung di-serialize
         
         # Cetak ke terminal server untuk membuktikan query selalu ditarik
         print("\n=== DEBUG V2: BUKTI QUERY SELALU JALAN ===", flush=True)
