@@ -60,7 +60,7 @@ async def process_and_reply_wa_v3(phone_number_id: str, from_number: str, user_m
 @router.get("/v2/webhook")
 @router.get("/v3/webhook")
 async def verify_whatsapp_webhook(request: Request):
-    verify_token = os.getenv("WHATSAPP_VERIFY_TOKEN", "rahasia123")
+    verify_token = os.getenv("WHATSAPP_VERIFY_TOKEN")
     mode = request.query_params.get("hub.mode")
     token = request.query_params.get("hub.verify_token")
     challenge = request.query_params.get("hub.challenge")
